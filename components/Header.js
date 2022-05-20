@@ -3,24 +3,24 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 function Header() {
-  const [isScrolled, setIsScrolled] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false);
   useEffect(() => {
-      const handleScroll = ()=>{
-        if (window.scrollY > 0){
-          setIsScrolled(true)
-        } else {
-          setIsScrolled(false)
-        }
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
       }
-      window.addEventListener("scroll", handleScroll)
-      return ()=>{
-        window.removeEventListener("scroll", handleScroll)
-      }
-  }, [])  //These square brackets make it so that this useEffect doesn't run constantly and runs only once when the page loads
-  
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+    //? Here the return statement is ran first as a clean up for the useeffect function, in this case it removes the event listner so that it doesn't slow down our page, when we don't need that eventlistner
+  }, []); //These square brackets make it so that this useEffect doesn't run constantly and runs only once when the page loads, and if anything is added to this array, whenever it will change, it will run the useeffect function
 
   return (
-    <header className={`${isScrolled && 'bg-[#141414]'}`}>
+    <header className={`${isScrolled && "bg-[#141414]"}`}>
       <div className="flex items-center space-x-2 md:space-x-10">
         <img
           src="https://rb.gy/ulxxee"
