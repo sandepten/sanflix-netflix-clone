@@ -2,6 +2,7 @@ import Head from "next/head";
 import Banner from "../components/Banner";
 import Header from "../components/Header";
 import Row from "../components/Row";
+import useAuth from "../hooks/useAuth";
 import req from "../utils/req";
 
 export default function Home({
@@ -14,6 +15,8 @@ export default function Home({
   topRated,
   trendingNow,
 }) {
+  const { logout, loading } = useAuth();
+  if (loading) return null;
   return (
     <div className="relative h-screen bg-gradient-to-b lg:h-[140vh]">
       <Head>
