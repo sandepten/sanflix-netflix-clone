@@ -2,9 +2,14 @@ import Image from "next/image";
 import { useState, useEffect } from "react";
 import { baseUrl } from "../constants/movie";
 import { FaPlay } from "react-icons/fa";
+import { useRecoilState } from "recoil";
+import { modalState, movieState } from "../atoms/modalAtom";
 
 const Banner = ({ netflixOriginals }) => {
   const [movie, setMovie] = useState(null);
+  const [showModal, setShowModal] = useRecoilState(modalState);
+  const [currentMovie, setCurrentMovie] = useRecoilState(movieState);
+
   useEffect(() => {
     setMovie(
       netflixOriginals[Math.floor(Math.random() * netflixOriginals.length)]
@@ -31,7 +36,13 @@ const Banner = ({ netflixOriginals }) => {
           <FaPlay className="h-4 w-4 text-black md:w-7 md:h-7" />
           Play
         </button>
-        <button className="bannerbutton bg-[gray]/70">
+        <button
+          className="bannerbutton bg-[gray]/70"
+          onClick={() => {
+            setCurrentMovie(movie);
+            setShowModal(true);
+          }}
+        >
           More Info
           <svg
             className="h-5 w-5 md:h-8 md:w-8"
